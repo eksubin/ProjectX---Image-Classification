@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 import numpy as np
-from tensorflow.keras.applications import vgg16
+from tensorflow.keras.applications import mobilenet
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.imagenet_utils import decode_predictions
-vgg_model = vgg16.VGG16(weights='imagenet')
+vgg_model = mobilenet.MobileNet(weights='imagenet')
 
 header = st.container()
 imgInput,imgOutput = st.columns(2)
@@ -28,7 +28,7 @@ def mriRecon(img):
 def Imagenet(img):
     numpy_image = img_to_array(img)
     image_batch = np.expand_dims(numpy_image, axis=0)
-    processed_image = vgg16.preprocess_input(image_batch.copy())
+    processed_image = mobilenet.preprocess_input(image_batch.copy())
     predictions = vgg_model.predict(processed_image)
     label_vgg = decode_predictions(predictions)
     return label_vgg
