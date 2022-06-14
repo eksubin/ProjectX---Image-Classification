@@ -49,7 +49,7 @@ with imgOutput:
     if st.button('Analyze the image'):
         observation = Imagenet(rezImg)
         st.header('Output')
-        st.text(observation[0])
-        st.text(observation[1])
-        st.text(observation[2])
+        st.text(observation[0][0])
+        st.text(observation[0][1])
+        st.text(observation[0][2])
 
